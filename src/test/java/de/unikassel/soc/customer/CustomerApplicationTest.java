@@ -1,17 +1,13 @@
 package de.unikassel.soc.customer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.unikassel.soc.customer.clients.ProductClient;
 import de.unikassel.soc.customer.controller.CustomerController;
 import de.unikassel.soc.customer.model.CustomerDto;
 import de.unikassel.soc.customer.service.CustomerService;
-import de.unikassel.soc.product.controller.ProductController;
-import de.unikassel.soc.product.service.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -33,7 +29,6 @@ class CustomerApplicationTest {
     CustomerService customerService;
 
     CustomerController customerController;
-    ProductController productController;
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);

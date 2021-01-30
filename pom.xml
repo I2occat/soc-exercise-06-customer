@@ -83,12 +83,6 @@
         <version>${mapstruct.version}</version>
         <scope>compile</scope>
     </dependency>
-    <dependency>
-        <groupId>de.unikassel.soc</groupId>
-        <artifactId>soc-product</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <scope>test</scope>
-    </dependency>
 </dependencies>
 
 <dependencyManagement>
