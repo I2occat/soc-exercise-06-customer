@@ -1,14 +1,10 @@
 package de.unikassel.soc.customer.controller;
 
-import com.netflix.discovery.converters.Auto;
-import de.unikassel.soc.client.web.client.ProductClient;
+import de.unikassel.soc.customer.clients.ProductClient;
 import de.unikassel.soc.customer.domain.Customer;
-import de.unikassel.soc.customer.mappers.CustomerMapper;
-import de.unikassel.soc.customer.mappers.CustomerMapperImpl;
 import de.unikassel.soc.customer.model.CustomerDto;
-import de.unikassel.soc.customer.repos.CustomerRepo;
+import de.unikassel.soc.customer.model.ProductDto;
 import de.unikassel.soc.customer.service.CustomerService;
-import de.unikassel.soc.customer.service.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -37,9 +34,17 @@ public class CustomerController {
         return customerService.getAll();
     }
 
+//    @GetMapping("/products") // just a proof of concept
+//    public Iterable<ProductDto> allProducts() {
+//        return productClient.getAllProducts();
+//    }
+
     @GetMapping("/{customerId}")
     public ResponseEntity<CustomerDto> getCustomer(@PathVariable("customerId") UUID customerId){
-        return new ResponseEntity<>(customerService.getCustomerById((customerId)), HttpStatus.OK);
+        CustomerDto customerDTO = customerService.getCustomerById(customerId);
+        List<ProductDto> productsByCustomerId = productClient.getProductsByCustomerId(customerId.toString());
+        customerDTO.setProducts(productsByCustomerId);
+        return new ResponseEntity<>(customerDTO, HttpStatus.OK);
     }
 
     @GetMapping("/byname/{customerName}")

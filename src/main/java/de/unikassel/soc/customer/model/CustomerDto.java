@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -20,4 +21,6 @@ public class CustomerDto {
     @NotBlank
     @Size(min = 3, max = 100)
     private String name;
+
+    private List<ProductDto> products;
 }
